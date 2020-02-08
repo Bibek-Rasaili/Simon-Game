@@ -131,7 +131,6 @@ $('div[type="button"]').click(function() {
     console.log("user pattern: " + userClickPattern);
 
 
-
     //Implement user input sounds and visuals
     implementChosenSound(userChosenColour);
     //this will go above sound but stays here for now
@@ -146,7 +145,7 @@ $('div[type="button"]').click(function() {
     if (same) {
       //Do nothing untill all input taken. Validation still enforced by same variable
       if (countClick === level) {
-        nextSequence();
+        setTimeout(nextSequence, 800);
         //if user and game pattern same then carry on to nextSequence
         userClickPattern = [];
         countClick = 0;
@@ -158,14 +157,12 @@ $('div[type="button"]').click(function() {
     }
 
 
-
   } else {
     alert("start the game first by pressing down any key on your keyboard");
   }
 })
 
-
-//Main for now.
+//Main - Starter function
 $(document).keydown(function() {
   if (!first) {
     nextSequence();
@@ -176,5 +173,3 @@ $(document).keydown(function() {
   }
 
 });
-
-//Test push
