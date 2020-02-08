@@ -3,6 +3,8 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickPattern = [];
 
+var first = false;
+
 function animatePress(currentColour){
   $('#'+currentColour).addClass('pressed'); //adds clicked effect
   setTimeout(function(){
@@ -57,5 +59,13 @@ $('div[type="button"]').click(function(){
 
 //Main for now.
 $(document).keydown(function(){
-  nextSequence();
+  if(!first){
+      nextSequence();
+      first = true;
+    }
+  else
+  {
+    console.log("stop PRESSING!");
+  }
+
 });
