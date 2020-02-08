@@ -3,6 +3,12 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickPattern = [];
 
+function animatePress(currentColour){
+  $('#'+currentColour).addClass('pressed'); //adds clicked effect
+  setTimeout(function(){
+    $('#'+currentColour).removeClass("pressed");
+  },100);
+}
 
 function implementChosenSound(randomChosenColour) {
   var sound = new Audio('sounds/'+randomChosenColour+'.mp3');
@@ -13,7 +19,6 @@ function implementChosenSound(randomChosenColour) {
 //This function animates the randomChosenColour to the screen
 function implementDivColour(randomChosenColour) {
   $('#' + randomChosenColour).fadeOut(150).fadeIn(150);
-
   //Fade Out, Fade In - chained together creates a 'flash' effect.
 
   implementChosenSound(randomChosenColour);
@@ -29,11 +34,9 @@ function nextSequence() {
   //the chosen color is added to Game Pattern,
   //which will hold the sequence of the game
 
-
   console.log("No: "+randomNumber+"random color "+randomChosenColour+ " game pattern "+gamePattern);
 
   implementDivColour(randomChosenColour);
-
 }
 
 
@@ -47,6 +50,8 @@ $('div[type="button"]').click(function(){
   console.log("user pattern: "+userClickPattern);
 
   implementChosenSound(userChosenColour);
+  //this will go above sound but stays here for now
+  animatePress(userChosenColour);
 })
 
 
