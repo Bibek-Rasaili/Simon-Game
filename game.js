@@ -8,6 +8,68 @@ var level = 0;
 
 var gameRunning = false;
 
+function comparePatterns(user, game) {
+  var same = true;
+  console.log("Comparing... ");
+  for (var i = 0; i < game.length; i++) {
+    if (user[i] === game[i]) {
+      //same
+      console.log(user[i] + " U Same G " + game[i]);
+      //no need to set to true as it starts with true
+      //and will only return false if conflict.
+    } else {
+      console.log(user[i] + " U NOTSAME G " + game[i]);
+      same = false //if conflict.
+    }
+  }
+
+  return same; //returns true is same, false is conflict
+  //return true of false
+}
+
+
+function gameOver() {
+  //Game Over sound
+  var wrong = new Audio('sounds/wrong.mp3');
+  wrong.play();
+
+  //Game Over visual
+  //heading
+  $('#level-title').text("Game Over, Press Any Key to Restart");
+
+  //background
+  $('body').addClass("game-over");
+
+  setTimeout(function() {
+    $('body').removeClass("game-over");
+  }, 100);
+
+  //Restarting the Game (reinitialising the game variables - first, level, userClickPattern)
+  first = false;
+  gameRunning = false;
+  level = 0;
+
+  //Emptying both patterns
+  console.log("Game Over \n");
+  console.log("User Pattern: " + userClickPattern + " \n");
+  // for (var i = 0; i < userClickPattern.length; i++) {
+  //   userClickPattern.pop();
+  //   console.log(userClickPattern + ". i is: "+i);
+  // }
+  userClickPattern.length = 0; //this empties array
+  console.log("User Pattern now: "+userClickPattern+"\n");
+
+
+  console.log("Game Pattern: " + gamePattern + " \n");
+  // for(var i=0; i<gamePattern.length; i++) {
+  //   gamePattern.pop();
+  //   console.log(gamePattern);
+  // }
+  gamePattern = []; //This empties array
+  console.log("Game Pattern now: " + gamePattern + " \n");
+
+}
+
 function animatePress(currentColour) {
   $('#' + currentColour).addClass('pressed'); //adds clicked effect
   setTimeout(function() {
@@ -51,15 +113,37 @@ function nextSequence() {
 // Click Event Listeners
 $('div[type="button"]').click(function() {
   if (gameRunning) {
+
+    //gets user input
+
     var userChosenColour = this.id; //stores the id (color) of the user input
     console.log(this.id);
 
     userClickPattern.push(userChosenColour);
     console.log("user pattern: " + userClickPattern);
 
+    //Implement user input sounds and visuals
+
+
     implementChosenSound(userChosenColour);
     //this will go above sound but stays here for now
     animatePress(userChosenColour);
+
+
+
+    //check and compare user input
+    var same = comparePatterns(userClickPattern, gamePattern);
+
+    //if same continue (nextSequence())
+    if (same) {
+      nextSequence();
+      //if user and game pattern same then carry on to nextSequence
+    } else {
+      gameOver();
+      //if conflict then game over
+    }
+
+
   } else {
     alert("start the game first by pressing down any key on your keyboard");
   }
