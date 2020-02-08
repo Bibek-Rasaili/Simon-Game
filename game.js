@@ -116,6 +116,18 @@ function nextSequence() {
   $('#level-title').text("Level " + level);
 }
 
+function flashHeading (){
+  $('#level-title').fadeOut(200).fadeIn(200);
+
+//Unfortunately have to access CSS Directly.
+//instead of adding a class to change style.
+//This is because the original style was added to ID.
+// and.. ID overrules all. Therefore direct access was needed.
+  $('#level-title').css("color","red");
+  setTimeout(function(){
+    $('#level-title').css("color","#FEF2BF");
+  },200);
+}
 
 
 // Click Event Listeners
@@ -158,7 +170,10 @@ $('div[type="button"]').click(function() {
 
 
   } else {
-    alert("start the game first by pressing down any key on your keyboard");
+    //alert("start the game first by pressing down any key on your keyboard");
+    //Heading Flash here
+    // Fade or change color to create flash
+    flashHeading();
   }
 })
 
