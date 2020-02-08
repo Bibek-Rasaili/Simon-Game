@@ -4,6 +4,7 @@ var gamePattern = [];
 var userClickPattern = [];
 
 var first = false;
+var level = 0;
 
 function animatePress(currentColour){
   $('#'+currentColour).addClass('pressed'); //adds clicked effect
@@ -39,6 +40,8 @@ function nextSequence() {
   console.log("No: "+randomNumber+"random color "+randomChosenColour+ " game pattern "+gamePattern);
 
   implementDivColour(randomChosenColour);
+  level++; //every new seq is new/next level
+  $('#level-title').text("Level "+level);
 }
 
 
@@ -62,6 +65,7 @@ $(document).keydown(function(){
   if(!first){
       nextSequence();
       first = true;
+
     }
   else
   {
