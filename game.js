@@ -6,15 +6,17 @@ var userClickPattern = [];
 var first = false;
 var level = 0;
 
-function animatePress(currentColour){
-  $('#'+currentColour).addClass('pressed'); //adds clicked effect
-  setTimeout(function(){
-    $('#'+currentColour).removeClass("pressed");
-  },100);
+var gameRunning = false;
+
+function animatePress(currentColour) {
+  $('#' + currentColour).addClass('pressed'); //adds clicked effect
+  setTimeout(function() {
+    $('#' + currentColour).removeClass("pressed");
+  }, 100);
 }
 
 function implementChosenSound(randomChosenColour) {
-  var sound = new Audio('sounds/'+randomChosenColour+'.mp3');
+  var sound = new Audio('sounds/' + randomChosenColour + '.mp3');
   sound.play();
 }
 
@@ -37,38 +39,40 @@ function nextSequence() {
   //the chosen color is added to Game Pattern,
   //which will hold the sequence of the game
 
-  console.log("No: "+randomNumber+"random color "+randomChosenColour+ " game pattern "+gamePattern);
+  console.log("No: " + randomNumber + "random color " + randomChosenColour + " game pattern " + gamePattern);
 
   implementDivColour(randomChosenColour);
   level++; //every new seq is new/next level
-  $('#level-title').text("Level "+level);
+  $('#level-title').text("Level " + level);
 }
 
 
 
 // Click Event Listeners
-$('div[type="button"]').click(function(){
-  var userChosenColour = this.id; //stores the id (color) of the user input
-  console.log(this.id);
+$('div[type="button"]').click(function() {
+  if (gameRunning) {
+    var userChosenColour = this.id; //stores the id (color) of the user input
+    console.log(this.id);
 
-  userClickPattern.push(userChosenColour);
-  console.log("user pattern: "+userClickPattern);
+    userClickPattern.push(userChosenColour);
+    console.log("user pattern: " + userClickPattern);
 
-  implementChosenSound(userChosenColour);
-  //this will go above sound but stays here for now
-  animatePress(userChosenColour);
+    implementChosenSound(userChosenColour);
+    //this will go above sound but stays here for now
+    animatePress(userChosenColour);
+  } else {
+    alert("start the game first by pressing down any key on your keyboard");
+  }
 })
 
 
 //Main for now.
-$(document).keydown(function(){
-  if(!first){
-      nextSequence();
-      first = true;
-
-    }
-  else
-  {
+$(document).keydown(function() {
+  if (!first) {
+    nextSequence();
+    first = true;
+    gameRunning = true;
+  } else {
     console.log("stop PRESSING!");
   }
 
