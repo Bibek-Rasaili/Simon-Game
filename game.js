@@ -1,6 +1,7 @@
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
+var userClickPattern = [];
 
 
 //This function animates the randomChosenColour to the screen
@@ -37,6 +38,14 @@ function nextSequence() {
 
 
 // Click Event Listeners
+$('div[type="button"]').click(function(){
+  var userChosenColour = this.id; //stores the id (color) of the user input
+  console.log(this.id);
+
+  userClickPattern.push(userChosenColour);
+  console.log("user pattern: "+userClickPattern);
+})
+
 
 //Main for now.
 $(document).keydown(function(){
