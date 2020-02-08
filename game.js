@@ -7,11 +7,18 @@ var first = false;
 var level = 0;
 
 var gameRunning = false;
+var countClick = 0;
 
 function comparePatterns(user, game) {
   var same = true;
+
   console.log("Comparing... ");
-  for (var i = 0; i < game.length; i++) {
+
+  //changed this to user.length from game.length
+  //as userClickedPattern is clearn after every successive "level"
+  //therefore if we had game.length, it would be comparing against null
+  //hence returning false.
+  for (var i = 0; i < user.length; i++) {
     if (user[i] === game[i]) {
       //same
       console.log(user[i] + " U Same G " + game[i]);
@@ -48,6 +55,7 @@ function gameOver() {
   first = false;
   gameRunning = false;
   level = 0;
+  countClick = 0;
 
   //Emptying both patterns
   console.log("Game Over \n");
@@ -57,7 +65,7 @@ function gameOver() {
   //   console.log(userClickPattern + ". i is: "+i);
   // }
   userClickPattern.length = 0; //this empties array
-  console.log("User Pattern now: "+userClickPattern+"\n");
+  console.log("User Pattern now: " + userClickPattern + "\n");
 
 
   console.log("Game Pattern: " + gamePattern + " \n");
@@ -113,18 +121,18 @@ function nextSequence() {
 // Click Event Listeners
 $('div[type="button"]').click(function() {
   if (gameRunning) {
+    countClick++; //or ++countClick ?
 
     //gets user input
-
     var userChosenColour = this.id; //stores the id (color) of the user input
     console.log(this.id);
 
     userClickPattern.push(userChosenColour);
     console.log("user pattern: " + userClickPattern);
 
+
+
     //Implement user input sounds and visuals
-
-
     implementChosenSound(userChosenColour);
     //this will go above sound but stays here for now
     animatePress(userChosenColour);
@@ -136,12 +144,19 @@ $('div[type="button"]').click(function() {
 
     //if same continue (nextSequence())
     if (same) {
-      nextSequence();
-      //if user and game pattern same then carry on to nextSequence
+      //Do nothing untill all input taken. Validation still enforced by same variable
+      if (countClick === level) {
+        nextSequence();
+        //if user and game pattern same then carry on to nextSequence
+        userClickPattern = [];
+        countClick = 0;
+        //Clear the user Pattern so they have to do whole pattern again not 1
+      }
     } else {
       gameOver();
       //if conflict then game over
     }
+
 
 
   } else {
