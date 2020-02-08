@@ -51,6 +51,17 @@ function gameOver() {
     $('body').removeClass("game-over");
   }, 100);
 
+  //Showing the user their level when Game over
+  var displayLvl = $('<h2>').addClass('level-display');
+  displayLvl.text("Your got up to Level: "+ level +".");
+  $('body').append(displayLvl);
+
+    //Can be done  when game starts instead
+  setTimeout(function(){
+    displayLvl.remove()
+  }, 4000);
+  //-----------------------
+
   //Restarting the Game (reinitialising the game variables - first, level, userClickPattern)
   first = false;
   gameRunning = false;
@@ -159,12 +170,22 @@ $('div[type="button"]').click(function() {
 
   } else {
     alert("start the game first by pressing down any key on your keyboard");
+    // FLASH HEADER can be implemented here
   }
 })
+
+function removeDisplayedLevel(){
+  if ($('.level-display').length)
+    $('.level-display').remove();
+}
 
 //Main - Starter function
 $(document).keydown(function() {
   if (!first) {
+
+    if(level>1)
+      removeDisplayedLevel();
+
     nextSequence();
     first = true;
     gameRunning = true;

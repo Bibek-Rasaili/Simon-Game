@@ -3,12 +3,17 @@ body {
   background-color: #011F3F;
 }
 
-#level-title {
+#level-title, .level-display {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
   margin:  5%;
   color: #FEF2BF;
 }
+
+.level-display {
+  font-size: 2rem;
+}/* added for displaying level after Game Over
+rest of the definition/rule with level-title above */
 
 .container {
   display: block;
