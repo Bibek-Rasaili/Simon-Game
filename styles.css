@@ -96,7 +96,7 @@ body {
 }
 /* Change this to max-DEVICE-width: 993
 - should be large enough to include tablets*/
-@media screen and (max-width: 993px) {
+@media screen and (max-device-width: 993px) {
   .btnContainer {
     display: block;
   }
