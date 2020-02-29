@@ -65,14 +65,14 @@ body {
   margin: auto;
   text-align: center;
 
-  /* 5% is on heading */
   margin-top: 2.5%;
 }
 
+/*  added to both because added one and removed the other */
 .btnStart, .disabledBtn {
   font-size: 1.2rem;
   text-transform: uppercase;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P', monospace;
 
   background-color: #FEF2BF;
   opacity: 0.9;
@@ -89,13 +89,13 @@ body {
   opacity: 0.75;
 }
 
-/* same as btnStart but is 'Disabled'  */
+/* disabled Start button  */
 .disabledBtn {
   opacity: 0.4;
   cursor: not-allowed;
 }
-/* Change this to max-DEVICE-width: 993
-- should be large enough to include tablets*/
+
+/* 993 to include tablets */
 @media screen and (max-device-width: 993px) {
   .btnContainer {
     display: block;

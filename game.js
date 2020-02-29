@@ -17,7 +17,8 @@ function gameOver() {
 
   $('#level-title').text("Game Over, Press Any Key to Restart"); //Game Over visual - heading
 
-  if($('.btnContainer').css('display') === 'block'){ //'Mobile, show different error msg'
+  //'Different error msg' for smaller screens
+  if($('.btnContainer').css('display') === 'block'){
     $('#level-title').text("Game Over, Press START to Restart");
   }
 
@@ -36,12 +37,10 @@ function gameOver() {
   userClickPattern.length = 0; //this empties array
   gamePattern = []; //This empties array
 
-
-  // For Mobile / smaller screen - device-width: (x)px ONLY.
+  //REenable Start Button and reset the button element when gameOver
   $('button[type="button"]').attr("disabled", false);
   $('button[type="button"]').addClass('btnStart');
   $('button[type="button"]').removeClass('disabledBtn');
-  //REenable Start Button
 }
 
 function animatePress(currentColour) {
@@ -164,7 +163,7 @@ $('div[type="button"]').click(function() {
 });
 
 
-
+// created this as it is begin used by keydown and onclick (on smaller-screens)
 function startGame(){
 
   level++ //will also have to be added end of each round/level
@@ -180,17 +179,16 @@ $(document).keydown(function() {
 
   if (!first) {
 
-    // IF you would like to change max-device-width to max-width
+// IF you would like to change max-device-width to max-width,
     //Just get rid of this if statement and just call/invoke the
     // disableStartButton function (without the if statement).
-    // - because the div container is hidden, button properties can still be altered (and div attributes?)
+// - because the div container is hidden BUT button properties can still be altered (and div attributes?)
     if($('.btnContainer').css('display') === 'block'){
       //if its small screen, class btnContainer will have display:block;
       disableStartButton();
       // reason why its not just on its own is because,
       // it was mean to be a desktop application.
-      // only added the button for 'Mobile'(s).
-      // HENCE max-DEVICE-width.
+      // only added the button for 'Mobile'(s) HENCE max-DEVICE-width.
     }
 
     startGame(); //moved to this function
@@ -204,20 +202,19 @@ function disableStartButton() { //Mobile
   $('button[type="button"]').attr("disabled", true);
   $('button[type="button"]').addClass('disabledBtn');
   $('button[type="button"]').removeClass('btnStart');
+  //had to be removeClass because of hover effect -  still 'lighting up'
 }
 
-// For Mobile / smaller screen - device-width: (x)px ONLY.
+// onclick event for smaller screens
 $('button[type="button"]').on("click",function(){
-  //$('#btnStart') only allowing 1 click for some reason.
-  //Then does all the adding and removing class in gameOver()
-  //BUT doesn't register a click...
+  //$('#btnStart') not registering more than 1 click
+  //Hence changed to $('button[type="button"]')
 
   disableStartButton();
-  // had to be removeClass because it was still doing hover effect - 'lighting up'
   startGame();
 });
 
-// If mobile screen, then show/start with a different start message
+// Different Start message for smaller screens
 $(document).ready(function(){
   if($('.btnContainer').css('display') === 'block'){
     $('#level-title').text("Press Start to Begin");
