@@ -92,7 +92,7 @@ body {
   cursor: not-allowed;
 }
 /* Change this to max-DEVICE-width: 800 */
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 1500px) {
   .btnContainer {
     display: block;
   }

@@ -30,6 +30,13 @@ function gameOver() {
   //Emptying both patterns
   userClickPattern.length = 0; //this empties array
   gamePattern = []; //This empties array
+
+
+  // For Mobile / smaller screen - device-width: (x)px ONLY.
+  $('button[type="button"]').attr("disabled", false);
+  $('button[type="button"]').addClass('btnStart');
+  $('button[type="button"]').removeClass('disabledBtn');
+  //REenable Start Button
 }
 
 function animatePress(currentColour) {
@@ -152,7 +159,7 @@ $('div[type="button"]').click(function() {
 });
 
 
-//Main - Game starts when keydown event occurs
+
 function startGame(){
 
   level++ //will also have to be added end of each round/level
@@ -163,9 +170,15 @@ function startGame(){
 // first also set here because, game should only start once, by clicking or keydown
 }
 
+//Main - Game starts when keydown event occurs
 $(document).keydown(function() {
 
   if (!first) {
+
+    if($('.btnContainer').css('display') === 'block'){
+      //if its small screen, class btnContainer will have display:block;
+      disableStartButton();
+    }
 
     startGame(); //moved to this function
 
@@ -174,10 +187,19 @@ $(document).keydown(function() {
   }
 });
 
-$('#btnStart').click(function(){
-  document.getElementById('btnStart').setAttribute("disabled", true);
-  $('#btnStart').addClass('disabledBtn');
-  $('#btnStart').removeClass('btnStart');
+function disableStartButton() {
+  $('button[type="button"]').attr("disabled", true);
+  $('button[type="button"]').addClass('disabledBtn');
+  $('button[type="button"]').removeClass('btnStart');
+}
+
+// For Mobile / smaller screen - device-width: (x)px ONLY.
+$('button[type="button"]').on("click",function(){
+  //$('#btnStart') only allowing 1 click for some reason.
+  //Then does all the adding and removing class in gameOver()
+  //BUT doesn't register a click...
+
+  disableStartButton();
   // had to be removeClass because it was still doing hover effect - 'lighting up'
   startGame();
 });
