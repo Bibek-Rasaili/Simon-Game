@@ -16,6 +16,11 @@ function gameOver() {
   wrong.play();
 
   $('#level-title').text("Game Over, Press Any Key to Restart"); //Game Over visual - heading
+
+  if($('.btnContainer').css('display') === 'block'){ //'Mobile, show different error msg'
+    $('#level-title').text("Game Over, Press START to Restart");
+  }
+
   $('body').addClass("game-over"); //- background
   setTimeout(function() {
     $('body').removeClass("game-over");
@@ -175,9 +180,17 @@ $(document).keydown(function() {
 
   if (!first) {
 
+    // IF you would like to change max-device-width to max-width
+    //Just get rid of this if statement and just call/invoke the
+    // disableStartButton function (without the if statement).
+    // - because the div container is hidden, button properties can still be altered (and div attributes?)
     if($('.btnContainer').css('display') === 'block'){
       //if its small screen, class btnContainer will have display:block;
       disableStartButton();
+      // reason why its not just on its own is because,
+      // it was mean to be a desktop application.
+      // only added the button for 'Mobile'(s).
+      // HENCE max-DEVICE-width.
     }
 
     startGame(); //moved to this function
@@ -187,7 +200,7 @@ $(document).keydown(function() {
   }
 });
 
-function disableStartButton() { //Mobile 
+function disableStartButton() { //Mobile
   $('button[type="button"]').attr("disabled", true);
   $('button[type="button"]').addClass('disabledBtn');
   $('button[type="button"]').removeClass('btnStart');
@@ -203,3 +216,10 @@ $('button[type="button"]').on("click",function(){
   // had to be removeClass because it was still doing hover effect - 'lighting up'
   startGame();
 });
+
+// If mobile screen, then show/start with a different start message
+$(document).ready(function(){
+  if($('.btnContainer').css('display') === 'block'){
+    $('#level-title').text("Press Start to Begin");
+  }
+})

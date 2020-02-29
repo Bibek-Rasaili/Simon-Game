@@ -89,13 +89,13 @@ body {
   opacity: 0.75;
 }
 
+/* same as btnStart but is 'Disabled'  */
 .disabledBtn {
-  /* same as btnStart expect, (is Disabled)  */
   opacity: 0.4;
   cursor: not-allowed;
 }
-
-/* Change this to max-DEVICE-width: 993 */
+/* Change this to max-DEVICE-width: 993
+- should be large enough to include tablets*/
 @media screen and (max-width: 993px) {
   .btnContainer {
     display: block;
