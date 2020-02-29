@@ -51,3 +51,41 @@ body {
   box-shadow: 0 0 20px white;
   background-color: grey;
 }
+
+
+
+/* For mobile/ smaller screens (with no keypads) only */
+.btnContainer {
+  display: none;
+
+  width: 50%;
+  margin: auto;
+  text-align: center;
+
+  /* 5% is on heading */
+  margin-top: 2.5%;
+}
+
+.btnStart {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+
+  background-color: #FEF2BF;
+  opacity: 0.9;
+  color: #011F3F;
+  border: 0;
+  border-radius: 3px;
+  padding: 8px 20px;
+}
+
+.btnStart:hover {
+  background-color: #FEF2BF;
+  opacity: 0.75;
+}
+
+/* Change this to max-DEVICE-width: 800 */
+@media screen and (max-width: 2000px) {
+  .btnContainer {
+    display: block;
+  }
+}
