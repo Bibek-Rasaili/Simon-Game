@@ -66,23 +66,31 @@ body {
   margin-top: 2.5%;
 }
 
-.btnStart {
+.btnStart, .disabledBtn {
   font-size: 1.2rem;
   text-transform: uppercase;
+  font-family: 'Press Start 2P', cursive;
 
   background-color: #FEF2BF;
   opacity: 0.9;
   color: #011F3F;
   border: 0;
   border-radius: 3px;
-  padding: 8px 20px;
-}
+  padding: 12px 25px;
 
+  cursor: default;
+  /* added because its changed in disabledBtn later */
+}
 .btnStart:hover {
   background-color: #FEF2BF;
   opacity: 0.75;
 }
 
+.disabledBtn {
+  /* same as btnStart expect, (is Disabled)  */
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 /* Change this to max-DEVICE-width: 800 */
 @media screen and (max-width: 2000px) {
   .btnContainer {

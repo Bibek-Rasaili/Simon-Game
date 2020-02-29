@@ -153,16 +153,31 @@ $('div[type="button"]').click(function() {
 
 
 //Main - Game starts when keydown event occurs
+function startGame(){
+
+  level++ //will also have to be added end of each round/level
+  nextSequence();
+  gameRunning = true;
+
+  first = true;
+// first also set here because, game should only start once, by clicking or keydown
+}
+
 $(document).keydown(function() {
 
   if (!first) {
 
-    level++ //will also have to be added end of each round/level
-    nextSequence();
-    first = true;
-    gameRunning = true;
+    startGame(); //moved to this function
 
   } else {
     console.log("Game is already underway.");
   }
+});
+
+$('#btnStart').click(function(){
+  document.getElementById('btnStart').setAttribute("disabled", true);
+  $('#btnStart').addClass('disabledBtn');
+  $('#btnStart').removeClass('btnStart');
+  // had to be removeClass because it was still doing hover effect - 'lighting up'
+  startGame();
 });
