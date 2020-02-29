@@ -11,10 +11,13 @@ body {
 }
 
 .container {
-  display: block;
+  /*
+  text-align:center from body tag ALONE, centers the content,
+  - By comenting out these, delays the wrapping of the boxes. - 2 a row (instead of 1).
+  */
+  /* display: block;
   width: 50%;
-  margin: auto;
-
+  margin: auto; */
 }
 
 .btn {
@@ -91,8 +94,9 @@ body {
   opacity: 0.4;
   cursor: not-allowed;
 }
-/* Change this to max-DEVICE-width: 800 */
-@media screen and (max-width: 1500px) {
+
+/* Change this to max-DEVICE-width: 993 */
+@media screen and (max-width: 993px) {
   .btnContainer {
     display: block;
   }

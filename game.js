@@ -187,7 +187,7 @@ $(document).keydown(function() {
   }
 });
 
-function disableStartButton() {
+function disableStartButton() { //Mobile 
   $('button[type="button"]').attr("disabled", true);
   $('button[type="button"]').addClass('disabledBtn');
   $('button[type="button"]').removeClass('btnStart');
